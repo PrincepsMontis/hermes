@@ -103,6 +103,25 @@ class ApiClient {
             body: JSON.stringify(profileData),
         });
     }
+    async uploadAvatar(file) {
+    const formData = new FormData();
+    formData.append('avatar', file);
+    
+    const response = await fetch(`${this.baseURL}/users/avatar`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${this.token}`
+        },
+        body: formData
+    });
+    
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to upload avatar');
+    }
+    
+    return response.json();
+}
 
     // ==========================================
     // TRIP METHODS
@@ -158,6 +177,19 @@ class ApiClient {
         });
     }
 
+    async uploadAvatar(file) {
+        const formData = new FormData();
+        formData.append('avatar', file);
+    
+        return this.request('/users/avatar', {
+        method: 'POST',
+        body: formData,
+        // Не указываем Content-Type - браузер сам установит для FormData
+        headers: {
+            'Authorization': `Bearer ${this.token}`
+        }
+    });
+}
 
     // ==========================================
     // BOOKING METHODS
@@ -218,7 +250,15 @@ class ApiClient {
             body: JSON.stringify(reviewData),
         });
     }
-
+    async getMyWrittenReviews() {
+        return this.request('/reviews/my-written-reviews');
+    }
+    async updateReview(reviewId, reviewData) {  
+        return this.request(`/reviews/${reviewId}`, {
+        method: 'PUT',
+        body: JSON.stringify(reviewData),
+    });
+}
 }
 
 // Глобальный экземпляр API клиента

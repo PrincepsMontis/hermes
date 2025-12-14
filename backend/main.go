@@ -45,10 +45,20 @@ func main() {
     frontendPath := filepath.Join(currentDir, "frontend")
     staticPath := filepath.Join(frontendPath, "static")
     publicPath := filepath.Join(frontendPath, "public")
+    uploadsPath := filepath.Join(currentDir, "uploads")
 
     log.Println("📁 Frontend path:", frontendPath)
     log.Println("📁 Static path:", staticPath)
     log.Println("📁 Public path:", publicPath)
+    log.Println("📁 Uploads path:", uploadsPath)
+
+    // Создаем папку для загрузок, если её нет
+    avatarsPath := filepath.Join(uploadsPath, "avatars")
+    if err := os.MkdirAll(avatarsPath, 0755); err != nil {
+        log.Println("⚠️ Failed to create avatars folder:", err)
+    } else {
+        log.Println("✅ Avatars folder ready:", avatarsPath)
+    }
 
     // Проверяем существование папок
     if _, err := os.Stat(staticPath); os.IsNotExist(err) {
@@ -62,6 +72,7 @@ func main() {
     router.Static("/static", staticPath)
     router.Static("/css", filepath.Join(staticPath, "css"))
     router.Static("/js", filepath.Join(staticPath, "js"))
+    router.Static("/uploads", uploadsPath)  // ДОБАВЛЕНО: раздача загруженных файлов
 
     // HTML страницы
     router.StaticFile("/", filepath.Join(publicPath, "index.html"))
@@ -95,6 +106,7 @@ func main() {
         {
             users.GET("/profile", handlers.GetProfile)
             users.PUT("/profile", handlers.UpdateProfile)
+            users.POST("/avatar", handlers.UploadAvatar)  // ДОБАВЛЕНО: загрузка аватарки
         }
 
         // Поездки
@@ -104,16 +116,15 @@ func main() {
             trips.GET("/:id", handlers.GetTrip)
         }
 
-        	// Поездки (требуют авторизации)
-	tripsAuth := api.Group("/trips")
-	tripsAuth.Use(middleware.AuthRequired())
-	{
-		tripsAuth.POST("", handlers.CreateTrip)
-		tripsAuth.GET("/my-trips", handlers.GetMyTrips)
-		tripsAuth.PATCH("/:id/cancel", handlers.CancelTrip)     // Отменить поездку
-		tripsAuth.PATCH("/:id/complete", handlers.CompleteTrip) // Завершить поездку
-	}
-
+        // Поездки (требуют авторизации)
+        tripsAuth := api.Group("/trips")
+        tripsAuth.Use(middleware.AuthRequired())
+        {
+            tripsAuth.POST("", handlers.CreateTrip)
+            tripsAuth.GET("/my-trips", handlers.GetMyTrips)
+            tripsAuth.PATCH("/:id/cancel", handlers.CancelTrip)
+            tripsAuth.PATCH("/:id/complete", handlers.CompleteTrip)
+        }
 
         // Бронирования (требуют авторизации)
         bookings := api.Group("/bookings")
@@ -123,8 +134,7 @@ func main() {
             bookings.GET("/my-bookings", handlers.GetMyBookings)
             bookings.GET("/driver", handlers.GetDriverBookings)
             bookings.PATCH("/:id/status", handlers.UpdateBookingStatus)
-			bookings.POST("/:id/rate", handlers.RatePassenger) // Оценить пассажира
-
+            bookings.POST("/:id/rate", handlers.RatePassenger)
         }
 
         // Отзывы (требуют авторизации)
@@ -134,6 +144,9 @@ func main() {
             reviews.POST("", handlers.CreateReview)
             reviews.GET("/user/:id", handlers.GetUserReviews)
             reviews.GET("/my-reviews", handlers.GetMyReviews)
+            reviews.GET("/check/:tripId", handlers.CheckExistingReview)
+            reviews.PUT("/:id", handlers.UpdateReview)
+            reviews.GET("/my-written-reviews", handlers.GetMyWrittenReviews)
         }
     }
 

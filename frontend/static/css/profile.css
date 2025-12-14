@@ -144,11 +144,15 @@
     border-color: #3498db;
 }
 
-.no-data {
+.no-data, .error {
     text-align: center;
     color: #7f8c8d;
     padding: 2rem;
 }
+
+/* ==========================================
+   ПОЕЗДКИ
+   ========================================== */
 
 .trips-list {
     display: flex;
@@ -213,7 +217,10 @@
     gap: 0.5rem;
 }
 
-/* Заявки на бронирование */
+/* ==========================================
+   ЗАЯВКИ НА БРОНИРОВАНИЕ
+   ========================================== */
+
 .bookings-list {
     display: flex;
     flex-direction: column;
@@ -290,7 +297,10 @@
     font-size: 0.9rem;
 }
 
-/* Отзывы */
+/* ==========================================
+   ОТЗЫВЫ С АВАТАРКАМИ
+   ========================================== */
+
 .reviews-list {
     display: flex;
     flex-direction: column;
@@ -299,390 +309,280 @@
 
 .review-card {
     background: white;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 1.5rem;
+    padding: 1.25rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 1rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
 .review-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
+    align-items: center;
+    margin-bottom: 0.75rem;
 }
 
 .review-author {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 12px;
 }
 
 .review-avatar {
-    font-size: 2rem;
-}
-
-.review-avatar img {
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     object-fit: cover;
-}
-
-.review-author strong {
-    font-size: 1rem;
-    color: #2c3e50;
-}
-
-.review-trip {
-    font-size: 0.85rem;
-    color: #7f8c8d;
-    margin: 0.25rem 0 0 0;
+    border: 2px solid #f0f0f0;
 }
 
 .review-rating {
-    font-size: 1.2rem;
-    color: #f39c12;
-}
-
-.review-comment {
-    margin: 0.5rem 0;
-    color: #34495e;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    margin-top: 4px;
 }
 
 .review-date {
-    font-size: 0.8rem;
-    color: #95a5a6;
-    margin: 0.5rem 0 0 0;
+    color: #999;
+    font-size: 0.85rem;
 }
 
-/* Модалка отзыва */
-.review-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.review-comment {
+    margin: 0;
+    color: #555;
+    line-height: 1.6;
+    padding-left: 60px;
 }
 
-.review-modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.review-modal-content {
-    position: relative;
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    max-width: 500px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    z-index: 1001;
-}
-
-.review-modal-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    color: #7f8c8d;
-    line-height: 1;
-}
-
-.review-modal-close:hover {
-    color: #2c3e50;
-}
-
-.review-modal h2 {
-    margin: 0 0 1.5rem 0;
-    color: #2c3e50;
-}
-
-.rating-input {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    gap: 0.5rem;
-}
-
-.rating-input input[type="radio"] {
-    display: none;
-}
-
-.rating-input label {
-    font-size: 2rem;
-    cursor: pointer;
-    color: #ddd;
-    transition: color 0.2s;
-}
-
-.rating-input input[type="radio"]:checked ~ label,
-.rating-input label:hover,
-.rating-input label:hover ~ label {
-    color: #f39c12;
-}
-
-.form-actions {
+.review-trip-info {
     display: flex;
     gap: 1rem;
-    margin-top: 1rem;
-}
-
-@media (max-width: 768px) {
-    .profile-content {
-        grid-template-columns: 1fr;
-    }
-
-    .profile-header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .trip-card,
-    .booking-card {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .trip-actions,
-    .booking-actions {
-        width: 100%;
-        flex-direction: column;
-    }
-
-    .trip-actions button,
-    .booking-actions button {
-        width: 100%;
-    }
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #f0f0f0;
+    font-size: 0.85rem;
+    color: #7f8c8d;
 }
 
 /* ==========================================
-   УЛУЧШЕННАЯ МОДАЛКА ОТЗЫВА СО ЗВЁЗДАМИ
+   МОИ НАПИСАННЫЕ ОТЗЫВЫ
    ========================================== */
 
-.review-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.review-modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-}
-
-.review-modal-content {
-    position: relative;
+.my-written-review-card {
     background: white;
-    padding: 2.5rem;
+    padding: 1.25rem;
     border-radius: 12px;
-    max-width: 500px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    z-index: 1001;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    animation: slideUp 0.3s ease;
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.review-modal-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: #f0f0f0;
-    border: none;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #7f8c8d;
-    line-height: 1;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 1rem;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-}
-
-.review-modal-close:hover {
-    background: #e74c3c;
-    color: white;
-    transform: rotate(90deg);
-}
-
-.review-modal h2 {
-    margin: 0 0 2rem 0;
-    color: #2c3e50;
-    font-size: 1.5rem;
-}
-
-/* ИНТЕРАКТИВНЫЕ ЗВЁЗДЫ */
-.rating-input {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 1rem 0;
-}
-
-.rating-input input[type="radio"] {
-    display: none;
-}
-
-.rating-input label {
-    font-size: 3rem;
-    cursor: pointer;
-    color: #ddd;
-    transition: all 0.2s;
-    filter: grayscale(100%);
-}
-
-.rating-input label:hover,
-.rating-input label:hover ~ label {
-    color: #f39c12;
-    filter: grayscale(0%);
-    transform: scale(1.1);
-}
-
-.rating-input input[type="radio"]:checked ~ label {
-    color: #f39c12;
-    filter: grayscale(0%);
-    animation: starBounce 0.5s ease;
-}
-
-@keyframes starBounce {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #34495e;
-    font-weight: 600;
-    font-size: 0.95rem;
-}
-
-.form-group textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-family: inherit;
-    resize: vertical;
-    transition: border-color 0.2s;
-}
-
-.form-group textarea:focus {
-    outline: none;
-    border-color: #3498db;
-}
-
-.form-actions {
-    display: flex;
     gap: 1rem;
-    margin-top: 2rem;
 }
 
-.form-actions button {
-    flex: 1;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
+.my-written-review-card .trip-info h4 {
+    margin: 0 0 0.5rem 0;
+    color: #2c3e50;
 }
 
-.form-actions .btn-primary {
+.my-written-review-card .trip-info p {
+    margin: 0.25rem 0;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.existing-review {
+    text-align: right;
+}
+
+.existing-review .review-text {
+    font-style: italic;
+    color: #555;
+    margin: 0.5rem 0;
+    max-width: 300px;
+}
+
+.btn-edit-review {
     background: #3498db;
     color: white;
     border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
 }
 
-.form-actions .btn-primary:hover {
+.btn-edit-review:hover {
     background: #2980b9;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
 }
 
-.form-actions .btn-primary:disabled {
-    background: #95a5a6;
-    cursor: not-allowed;
-    transform: none;
+/* ==========================================
+   МОДАЛЬНОЕ ОКНО ОТЗЫВА
+   ========================================== */
+
+.review-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(0,0,0,0.5) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 10000 !important;
 }
 
-.form-actions .btn-outline {
-    background: white;
-    color: #7f8c8d;
-    border: 2px solid #e0e0e0;
+.review-modal-content {
+    background: white !important;
+    padding: 2rem !important;
+    border-radius: 16px !important;
+    max-width: 500px !important;
+    width: 90% !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2) !important;
 }
 
-.form-actions .btn-outline:hover {
-    background: #f8f9fa;
-    border-color: #bdc3c7;
+.review-modal-content h3 {
+    text-align: center !important;
+    margin: 0 0 1.5rem 0 !important;
+    color: #2c3e50 !important;
+    font-size: 1.5rem !important;
 }
 
-/* Показываем выбранный рейтинг */
-.rating-display {
-    text-align: center;
-    margin-top: 0.5rem;
-    font-size: 1.1rem;
-    color: #7f8c8d;
-    min-height: 1.5rem;
+.modal-subtitle {
+    text-align: center !important;
+    color: #7f8c8d !important;
+    margin: 0 0 1.5rem 0 !important;
 }
 
-.rating-display.active {
-    color: #f39c12;
-    font-weight: 600;
+.rating-input {
+    margin: 1.5rem 0 !important;
 }
-/* Дополнительные кнопки */
+
+.rating-input > label {
+    display: block !important;
+    text-align: center !important;
+    font-weight: 600 !important;
+    margin-bottom: 1rem !important;
+    color: #34495e !important;
+}
+
+.star-rating {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin: 1rem 0 !important;
+}
+
+.star-rating input {
+    display: none !important;
+}
+
+.star-rating label {
+    cursor: pointer !important;
+    font-size: 2.5rem !important;
+    transition: all 0.2s ease !important;
+    filter: grayscale(100%) !important;
+}
+
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    filter: grayscale(0%) !important;
+    transform: scale(1.1) !important;
+}
+
+#ratingDisplay {
+    text-align: center !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    color: #3498db !important;
+    min-height: 30px !important;
+    margin-top: 0.5rem !important;
+}
+
+.review-modal-content .form-group {
+    margin: 1.5rem 0 !important;
+}
+
+.review-modal-content .form-group label {
+    display: block !important;
+    margin-bottom: 0.5rem !important;
+    font-weight: 600 !important;
+    color: #34495e !important;
+}
+
+.review-modal-content textarea {
+    width: 100% !important;
+    padding: 0.75rem !important;
+    border: 1px solid #ddd !important;
+    border-radius: 8px !important;
+    font-family: inherit !important;
+    font-size: 1rem !important;
+    resize: vertical !important;
+    box-sizing: border-box !important;
+}
+
+.review-modal-content textarea:focus {
+    outline: none !important;
+    border-color: #3498db !important;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1) !important;
+}
+
+.modal-actions {
+    display: flex !important;
+    gap: 1rem !important;
+    justify-content: flex-end !important;
+    margin-top: 1.5rem !important;
+}
+
+.modal-actions .btn-primary,
+.modal-actions .btn-secondary {
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 8px !important;
+    border: none !important;
+    cursor: pointer !important;
+    font-size: 1rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.modal-actions .btn-primary {
+    background: #3498db !important;
+    color: white !important;
+}
+
+.modal-actions .btn-primary:hover:not(:disabled) {
+    background: #2980b9 !important;
+    transform: translateY(-2px) !important;
+}
+
+.modal-actions .btn-secondary {
+    background: #ecf0f1 !important;
+    color: #7f8c8d !important;
+}
+
+.modal-actions .btn-secondary:hover {
+    background: #bdc3c7 !important;
+}
+
+button:disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+}
+
+/* ==========================================
+   ДОПОЛНИТЕЛЬНЫЕ КНОПКИ
+   ========================================== */
+
 .btn-success {
     background: #27ae60;
     color: white;
@@ -717,3 +617,34 @@
     box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
 }
 
+/* ==========================================
+   АДАПТИВНОСТЬ
+   ========================================== */
+
+@media (max-width: 768px) {
+    .profile-content {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .trip-card,
+    .booking-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .trip-actions,
+    .booking-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .trip-actions button,
+    .booking-actions button {
+        width: 100%;
+    }
+}

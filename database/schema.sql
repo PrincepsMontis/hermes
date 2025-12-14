@@ -93,3 +93,5 @@ CREATE TRIGGER update_trips_updated_at BEFORE UPDATE ON trips
 
 CREATE TRIGGER update_bookings_updated_at BEFORE UPDATE ON bookings
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+CREATE UNIQUE INDEX idx_reviews_unique_author_trip ON reviews(author_id, trip_id);
+ALTER TABLE reviews ADD CONSTRAINT unique_review_per_trip UNIQUE (author_id, trip_id);
