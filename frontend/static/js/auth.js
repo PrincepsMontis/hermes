@@ -451,5 +451,37 @@ function updateCheckboxAppearance(checkbox, checkmark) {
     checkmark.innerHTML = '';
   }
 }
+// ==========================================
+// УПРАВЛЕНИЕ ВИДИМОСТЬЮ ПО РОЛЯМ
+// ==========================================
+window.parseJWT = function(token) {
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => 
+            '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+        ).join(''));
+        return JSON.parse(jsonPayload);
+    } catch (e) {
+        return null;
+    }
+};
 
+window.getUserRole = function() {
+    const token = AppStorage.get('token');
+    if (!token) return null;
+    const decoded = parseJWT(token);
+    return decoded ? decoded.role : null;
+};
+
+window.applyRoleBasedUI = function() {
+    const role = getUserRole();
+    if (!role) return;
+    
+    document.querySelectorAll('[data-role]').forEach(el => {
+        if (el.getAttribute('data-role') !== role) {
+            el.style.display = 'none';
+        }
+    });
+};
 console.log("✅ Auth.js loaded");

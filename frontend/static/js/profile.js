@@ -280,6 +280,10 @@ function updateProfileDisplay(user) {
     roleElement.textContent = user.role === 'driver' ? '🚗 Водитель' : '👤 Пассажир';
   }
 
+  const emailElement = document.querySelector('.profile-email');
+    if (emailElement) {
+        emailElement.textContent = user.email;
+    }
   const avatarElement = document.querySelector('.profile-avatar img');
   if (avatarElement && user.avatar) {
     avatarElement.src = user.avatar;
