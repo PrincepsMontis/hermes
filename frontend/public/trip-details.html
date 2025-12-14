@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Детали поездки – Hermes</title>
+    <link rel="stylesheet" href="static/css/index.css">
+    <link rel="stylesheet" href="static/css/trip.css">
+</head>
+<body>
+<header>
+    <div class="container header-content">
+        <a href="index.html" class="logo-link">
+            <span class="logo-icon">🚗</span>
+            <div class="logo">
+                <h1>Hermes</h1>
+            </div>
+        </a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="search-trips.html">Найти поездку</a></li>
+                <li><a href="create-trip.html">Создать поездку</a></li>
+                <li><a href="profile.html" id="navProfileLink">Профиль</a></li>
+                <li><a href="login.html" id="navLoginLink">Вход</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="trip-details-page">
+    <div class="container">
+        <section class="trip-details-card" id="tripDetails">
+            <div class="no-results">
+                <h3>Загрузка данных поездки...</h3>
+                <p>Пожалуйста, подождите.</p>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer>
+    <div class="container footer-content">
+        <div class="footer-section">
+            <h3>Hermes</h3>
+            <p>Карпулинг-сервис для совместных поездок между городами.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Навигация</h4>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="search-trips.html">Найти поездку</a></li>
+                <li><a href="create-trip.html">Создать поездку</a></li>
+                <li><a href="profile.html">Профиль</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2025 Hermes
+    </div>
+</footer>
+
+<!-- СКРИПТЫ ПОДКЛЮЧЕНЫ ОДИН РАЗ -->
+<script src="static/js/main.js"></script>
+<script src="static/js/api.js"></script>
+<script src="static/js/trip-details-page.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация - Hermes</title>
+    <link rel="stylesheet" href="static/css/index.css">
+    <link rel="stylesheet" href="static/css/auth.css">
+    <link rel="stylesheet" href="static/css/responsive.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" class="logo-link">
+                        <span class="logo-icon">🚗</span>
+                        <h1>Hermes</h1>
+                    </a>
+                </div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="login.html">Вход</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="auth-container">
+        <div class="auth-form">
+            <div class="auth-header">
+                <h2>Регистрация</h2>
+                <p>Создайте аккаунт для поиска и создания поездок</p>
+            </div>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="fullName">Полное имя</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Иван Иванов" required>
+                    <div class="input-hint">Как вас представить другим пользователям</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="ivanov@example.com" required>
+                    <div class="input-hint">Мы отправим подтверждение на этот email</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+7 999 123-45-67" required>
+                    <div class="input-hint">Для связи с попутчиками</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Минимум 6 символов" required>
+                        <button type="button" class="password-toggle">👁️</button>
+                    </div>
+                    <div class="input-hint">Используйте цифры, буквы и символы</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Подтверждение пароля</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Повторите пароль" required>
+                        <button type="button" class="password-toggle">👁️</button>
+                    </div>
+                </div>
+
+                <div class="checkbox-container">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="isDriver" id="isDriver" class="checkbox-hidden">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-text">Я буду предлагать поездки (водитель)</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-primary btn-full">
+                    <span class="btn-text">Зарегистрироваться</span>
+                </button>
+            </form>
+
+            <div class="auth-links">
+                <p>Уже есть аккаунт? <a href="login.html">Войти</a></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Hermes</h3>
+                    <p>Совместные поездки по России</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ПРАВИЛЬНЫЙ ПОРЯДОК: api.js, потом auth.js -->
+    <script src="static/js/api.js"></script>
+    <script src="static/js/auth.js"></script>
+</body>
+</html>
